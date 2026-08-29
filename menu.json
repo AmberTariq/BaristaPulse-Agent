@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Matcha Latte",
+    "vibe": "creamy and earthy",
+    "iced": true
+  },
+  {
+    "name": "Nitro Cold Brew",
+    "vibe": "strong, bold, and energetic",
+    "iced": true
+  },
+  {
+    "name": "Vanilla Oat Macchiato",
+    "vibe": "sweet, warm, and comforting",
+    "iced": false
+  }
+]
