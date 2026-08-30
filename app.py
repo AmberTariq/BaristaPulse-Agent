@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. Setup the AI connection using your free key
 # To test locally, you can paste your key here directly as a string: "AIzaSy..."
 # (Later, we will secure this so no one steals it from GitHub!)
-GOOGLE_API_KEY = "PASTE_YOUR_COPIED_API_KEY_HERE"
+GOOGLE_API_KEY = "AQ.Ab8RN6KBAQEm_vLm2xtZw2GkugoyLn396wFra030aCMO5G_8oQ"
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # 2. Your Aesthetic Header Design
