@@ -4,8 +4,19 @@ import google.generativeai as genai
 # 1. Setup the AI connection using your free key
 # To test locally, you can paste your key here directly as a string: "AIzaSy..."
 # (Later, we will secure this so no one steals it from GitHub!)
-GOOGLE_API_KEY = "AQ.Ab8RN6KBAQEm_vLm2xtZw2GkugoyLn396wFra030aCMO5G_8oQ"
-genai.configure(api_key=GOOGLE_API_KEY)
+# PASTE THIS INSTEAD
+try:
+    # First, look for the secret securely stored in Streamlit Cloud
+    GOOGLE_API_KEY = st.secrets["GEMINI_KEY"]
+except Exception:
+    # If running locally on your computer, check for a local secrets file
+    GOOGLE_API_KEY = st.secrets.get("secrets", {}).get("GEMINI_KEY", "")
+
+if GOOGLE_API_KEY:
+    genai.configure(api_key=GOOGLE_API_KEY)
+else:
+    st.error("API Key missing! Please configure GEMINI_KEY in your Streamlit secrets management panel.")
+
 
 # 2. Your Aesthetic Header Design
 st.title("☕ BaristaPulse: Your Aesthetic Coffee Agent")
