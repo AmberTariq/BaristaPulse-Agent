@@ -1,102 +1,90 @@
 import streamlit as st
 
-# Set up page configurations with a friendly coffee emoji
-st.set_page_config(page_title="BaristaPulse AI", page_icon="☕", layout="wide")
+# 1. Structural Layout Rules
+st.set_page_config(page_title="BaristaPulse", page_icon="☕", layout="wide")
 
-# Injecting the "Bold Typography Theme" styles directly
+# 2. Master Style Injection: Creates the exact "Bold Typography Theme" from the video
 st.markdown("""
     <style>
-    /* Main body typography and color space */
+    /* Import modern bold typography font */
     @import url('https://googleapis.com');
     
+    /* Background and global typography settings */
     .stApp {
-        background-color: #FFFDD0;
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #FFFDD0 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
     
-    /* Main Headings Styling */
-    h1 {
-        font-size: 2.85rem !important;
+    /* Bold Title Typography styling matching your video video */
+    .bold-main-title {
+        font-size: 3rem !important;
         font-weight: 800 !important;
         color: #4A2E1B !important;
-        letter-spacing: -0.03em;
-        margin-bottom: 5px !important;
+        letter-spacing: -0.04em !important;
+        margin-bottom: 2px !important;
     }
     
-    h2, h3 {
-        font-weight: 700 !important;
-        color: #4A2E1B !important;
-        letter-spacing: -0.01em;
-    }
-    
-    /* Left column workspace wrapper container */
+    /* Left column workspace wrapper with crisp bold borders */
     .left-workspace-box {
-        background-color: #FFF8E7;
-        padding: 30px;
-        border-radius: 20px;
-        border: 2px solid #4A2E1B;
-        box-shadow: 4px 4px 0px 0px #4A2E1B;
+        background-color: #FFF8E7 !important;
+        padding: 28px;
+        border-radius: 20px !important;
+        border: 3px solid #4A2E1B !important;
+        box-shadow: 5px 5px 0px 0px #4A2E1B !important;
         margin-bottom: 25px;
     }
     
-    /* Luxury Premium Coffee Menu Cards */
+    /* Crisp bold coffee cards matching your template layout */
     .coffee-menu-card {
-        background-color: #FFF8E7;
+        background-color: #FFF8E7 !important;
         padding: 24px;
-        border-radius: 18px;
-        border: 2px solid #4A2E1B;
-        box-shadow: 4px 4px 0px 0px #4A2E1B;
+        border-radius: 18px !important;
+        border: 3px solid #4A2E1B !important;
+        box-shadow: 5px 5px 0px 0px #4A2E1B !important;
         margin-bottom: 22px;
     }
     
-    /* Custom Badge for Coffee Vibe Profiles */
+    /* Text layout overrides */
+    h2, h3, p, span {
+        color: #4A2E1B !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+    
     .theme-vibe-tag {
-        background-color: #4A2E1B;
+        background-color: #4A2E1B !important;
         color: #FFFDD0 !important;
-        padding: 6px 14px;
+        padding: 5px 14px;
         border-radius: 30px;
         font-size: 0.8rem;
         font-weight: 600;
         display: inline-block;
         margin-bottom: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.03em;
     }
     
-    /* Style descriptions text */
-    .drink-description-text {
-        font-size: 1.05rem;
-        color: #5D4037;
-        line-height: 1.5;
-        margin-bottom: 10px;
-    }
-    
-    /* Quick Mood Express Buttons styling overlay */
+    /* Custom interactive button styles from the video */
     .stButton>button {
         font-family: 'Plus Jakarta Sans', sans-serif !important;
         font-weight: 700 !important;
         background-color: #FFF8E7 !important;
         color: #4A2E1B !important;
-        border: 2px solid #4A2E1B !important;
+        border: 3px solid #4A2E1B !important;
         border-radius: 12px !important;
-        box-shadow: 2px 2px 0px 0px #4A2E1B !important;
-        transition: all 0.2s ease;
+        box-shadow: 3px 3px 0px 0px #4A2A1B !important;
     }
     .stButton>button:hover {
         background-color: #4A2E1B !important;
         color: #FFFDD0 !important;
-        box-shadow: 0px 0px 0px 0px #4A2E1B !important;
-        transform: translate(2px, 2px);
     }
     </style>
     """, unsafe_html=True)
 
-# 2. Main Layout Structure Split Configuration
+# 3. Split Screen into Two columns 
 col1, col2 = st.columns([1, 1.15], gap="large")
 
 with col1:
     st.markdown('<div class="left-workspace-box">', unsafe_html=True)
-    st.markdown("<h1>☕ BaristaPulse</h1>", unsafe_html=True)
+    st.markdown('<p class="bold-main-title">☕ BaristaPulse</p>', unsafe_html=True)
     st.caption("Welcome to The Coffee Logic — Your Personal AI Companion")
     
     st.markdown("""
@@ -112,11 +100,10 @@ with col1:
     """)
     st.markdown('</div>', unsafe_html=True)
     
-    # Initialize interactive state values
     if "active_selection" not in st.session_state:
         st.session_state.active_selection = None
         
-    vibe_input = st.text_input("How are you feeling right now?", placeholder="e.g., I need a bold boost or something calming...", key="main_chat_input")
+    vibe_input = st.text_input("How are you feeling right now?", placeholder="e.g., I need a bold boost...", key="main_chat_input")
     if vibe_input:
         if any(w in vibe_input.lower() for w in ["bold", "energy", "strong"]):
             st.session_state.active_selection = "Nitro Cold Brew"
@@ -129,7 +116,7 @@ with col1:
         st.success(f"🌟 **BaristaPulse:** 'Hey there! Based on your preference, I highly recommend our **{st.session_state.active_selection}**!'")
 
     st.write("---")
-    st.markdown("### ⚡ QUICK MOOD EXPRESS", unsafe_html=True)
+    st.markdown("### ⚡ QUICK MOOD EXPRESS")
     if st.button("🔥 High Energy Boost (Nitro Cold Brew)"):
         st.session_state.active_selection = "Nitro Cold Brew"
         st.rerun()
@@ -147,8 +134,7 @@ with col2:
     st.markdown('<div class="coffee-menu-card">', unsafe_html=True)
     st.markdown('<h3>🌿 Matcha Latte</h3>', unsafe_html=True)
     st.markdown('<div class="theme-vibe-tag">Vibe: creamy, smooth, and earthy</div>', unsafe_html=True)
-    st.markdown('<p class="drink-description-text">Ceremonial grade Uji matcha delicately whisked with velvety steamed oat milk and a touch of wild wildflower honey.</p>', unsafe_html=True)
-    st.caption("✨ Earthy Umami | 🥛 Silky Creamy Milk | 🍯 Mild Sweetness")
+    st.write("Ceremonial grade Uji matcha delicately whisked with velvety steamed oat milk and a touch of wild wildflower honey.")
     if st.button("Select Matcha Formula", key="m_btn"):
         st.session_state.active_selection = "Matcha Latte"
         st.rerun()
@@ -158,8 +144,7 @@ with col2:
     st.markdown('<div class="coffee-menu-card">', unsafe_html=True)
     st.markdown('<h3>⚡ Nitro Cold Brew</h3>', unsafe_html=True)
     st.markdown('<div class="theme-vibe-tag">Vibe: strong, bold, and highly energetic</div>', unsafe_html=True)
-    st.markdown('<p class="drink-description-text">Single-origin Ethiopian beans steeped for 20 hours and infused with pure nitrogen for a cascading, velvet mouthfeel.</p>', unsafe_html=True)
-    st.caption("💥 High Caffeine | 🍇 Berry Undertones | 🍫 Cocoa Finish")
+    st.write("Single-origin Ethiopian beans steeped for 20 hours and infused with pure nitrogen for a cascading, velvet mouthfeel.")
     if st.button("Select Nitro Formula", key="n_btn"):
         st.session_state.active_selection = "Nitro Cold Brew"
         st.rerun()
@@ -169,8 +154,7 @@ with col2:
     st.markdown('<div class="coffee-menu-card">', unsafe_html=True)
     st.markdown('<h3>🍂 Vanilla Oat Macchiato</h3>', unsafe_html=True)
     st.markdown('<div class="theme-vibe-tag">Vibe: sweet, warm, and comforting</div>', unsafe_html=True)
-    st.markdown('<p class="drink-description-text">Freshly pulled espresso shots layered carefully over steamed vanilla bean organic oat milk and finished with a dense caramel drizzle.</p>', unsafe_html=True)
-    st.caption("🍂 Warm Vanilla Bean | ☕ Roasted Espresso | 🍯 Golden Caramel")
+    st.write("Freshly pulled espresso shots layered carefully over steamed vanilla bean organic oat milk and finished with a dense caramel drizzle.")
     if st.button("Select Macchiato Formula", key="v_btn"):
         st.session_state.active_selection = "Vanilla Oat Macchiato"
         st.rerun()
