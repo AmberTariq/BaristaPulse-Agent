@@ -2,9 +2,6 @@ import streamlit as st
 import google.generativeai as genai
 
 # 1. Setup the AI connection using your free key
-# To test locally, you can paste your key here directly as a string: "AIzaSy..."
-# (Later, we will secure this so no one steals it from GitHub!)
-# PASTE THIS INSTEAD
 try:
     # First, look for the secret securely stored in Streamlit Cloud
     GOOGLE_API_KEY = st.secrets["GEMINI_KEY"]
