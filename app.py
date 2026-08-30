@@ -1,33 +1,10 @@
 import streamlit as st
 import json
 
-# Apply structural configurations first
+# Set up page configurations with a friendly coffee emoji
 st.set_page_config(page_title="BaristaPulse AI", page_icon="☕", layout="wide")
 
-# Custom styling wrapper block
-st.markdown("""
-    <style>
-    .stApp {
-        background-color: #FFFDD0;
-    }
-    h1, h2, h3, p, label, .stMarkdown {
-        color: #4A2E1B !important;
-    }
-    .stButton>button {
-        background-color: #4A2E1B !important;
-        color: #FFFDD0 !important;
-        border-radius: 8px;
-    }
-    .drink-card {
-        background-color: #FFF8E7;
-        padding: 15px;
-        border-radius: 12px;
-        margin-bottom: 10px;
-    }
-    </style>
-    """, unsafe_html=True)
-
-# Dataset initializer function
+# Expanded Dataset directly embedded to avoid separate file read crashes
 @st.cache_data
 def load_expanded_menu():
     return [
@@ -40,7 +17,7 @@ def load_expanded_menu():
 
 menu = load_expanded_menu()
 
-# Establish memory storage variables
+# Initialize session structures for Favorites and History tracking
 if "favorites" not in st.session_state:
     st.session_state.favorites = []
 if "order_history" not in st.session_state:
@@ -48,7 +25,7 @@ if "order_history" not in st.session_state:
 if "current_recommendation" not in st.session_state:
     st.session_state.current_recommendation = None
 
-# Sidebar panels
+# Sidebar Panels
 with st.sidebar:
     st.header("👤 BaristaPulse Profile")
     st.subheader("⭐ Saved Favorites")
@@ -65,16 +42,16 @@ with st.sidebar:
     else:
         st.caption("Your tray is empty.")
 
-# Main screen conversation layout panels
+# Main Application Headers
 st.title("☕ BaristaPulse: Aesthetic Coffee Agent ✨")
-st.write("Welcome! I am **BaristaPulse**, your personal coffee matchmaker. Tell me your mood or taste preference below!")
+st.write("Welcome! I am BaristaPulse, your personal coffee matchmaker. Tell me your mood or taste preference below!")
 
 col1, col2 = st.columns(2)
 
 with col1:
     vibe_input = st.text_input("How are you feeling right now?", placeholder="e.g., I need a bold boost or something calming...")
     if vibe_input:
-        matched_drink = menu[0] # Default fallback matching rule
+        matched_drink = menu[0] # Default fallback rule
         for drink in menu:
             if any(word in vibe_input.lower() for word in drink["vibe"].replace(",", "").split()):
                 matched_drink = drink
