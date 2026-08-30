@@ -43,7 +43,8 @@ with col1:
                 full_prompt = f"{system_instruction}\n\nCustomer Mood: {user_mood}"
                 
                 # Call Google's fast, free model
-                model = genai.GenerativeModel('gemini-1.5-flash-latest')
+              model = genai.GenerativeModel('gemini-2.5-flash')
+
                 response = model.generate_content(full_prompt)
                 
                 # Display the AI's response inside a nice colored box
